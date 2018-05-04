@@ -1,5 +1,6 @@
 package com.example.koki.gwapplication
 
+import android.Manifest
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -7,6 +8,9 @@ import com.wikitude.architect.ArchitectStartupConfiguration
 import com.wikitude.architect.ArchitectView
 import com.wikitude.common.camera.CameraSettings.CameraPosition
 import java.io.IOException
+import android.support.v4.app.ActivityCompat
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         val config = ArchitectStartupConfiguration()
         config.licenseKey = this.getWikitudeSDKLicenseKey()
         config.features = this.getCameraPosition().ordinal
+
+        val REQUEST_CODE = 1
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CODE)
 
         try {
             this.architectView!!.onCreate(config) //（3）
